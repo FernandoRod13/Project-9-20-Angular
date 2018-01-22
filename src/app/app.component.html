@@ -1,2 +1,35 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened="true">
+        <mat-nav-list>
+          <mat-list-item routerLink="/resources" routerLinkActive="active">
+              <mat-icon mat-list-icon>list</mat-icon>
+              Resources
+          </mat-list-item>
+          <mat-list-item routerLink="/suppliers" routerLinkActive="active">
+              <mat-icon mat-list-icon>store</mat-icon>
+              Suppliers
+          </mat-list-item>
+          <mat-list-item routerLink="/purchases" routerLinkActive="active">
+              <mat-icon mat-list-icon>shopping_cart</mat-icon>
+              Purchases
+          </mat-list-item>
+          <mat-list-item routerLink="/payments" routerLinkActive="active">
+              <mat-icon mat-list-icon>payment</mat-icon>
+              Pay Methods
+          </mat-list-item>
+          <mat-list-item routerLink="/notifications" routerLinkActive="active">
+              <mat-icon mat-list-icon>notifications</mat-icon>
+              Notifications
+          </mat-list-item>
+          <mat-list-item routerLink="/account" routerLinkActive="active">
+              <mat-icon mat-list-icon>account_circle</mat-icon>
+              Account
+          </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
 
