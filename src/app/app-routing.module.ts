@@ -12,6 +12,7 @@ import { AuthGuardService } from './authentication/auth-guard.service';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
+    { path: 'admin', redirectTo: '/admin/resources', pathMatch: 'full' },
     { path: 'admin', canActivate: [AuthGuardService], component: AdminContainerComponent, children: [
       { path: 'resources', component: ResourceManagerComponent },
       { path: 'suppliers', component: SupplierManagerComponent },

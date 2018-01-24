@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  private login() {
+  public login() {
     this.auth.login(this.email, this.password).subscribe( admin => {
       console.log(admin);
       if (admin) {
