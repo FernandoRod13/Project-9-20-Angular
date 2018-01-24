@@ -8,12 +8,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './app-material.module';
 import { ProjectsClientService } from './http/projects-client.service';
 import { SupplierClientService } from './http/supplier-client.service';
+import { RequestersClientService } from './http/requesters-client.service';
 import { ResourceManagerComponent } from './managers/resource-manager/resource-manager.component';
 import { AccountManagerComponent } from './managers/account-manager/account-manager.component';
 import { PaymentMethodManagerComponent } from './managers/payment-method-manager/payment-method-manager.component';
 import { NotificationManagerComponent } from './managers/notification-manager/notification-manager.component';
 import { SupplierManagerComponent } from './managers/supplier-manager/supplier-manager.component';
 import { PurchaseManagerComponent } from './managers/purchase-manager/purchase-manager.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './authentication/auth-guard.service';
+import { AuthenticationService } from './authentication/authentication.service';
+import { AdminContainerComponent } from './admin-container/admin-container.component';
 
 
 @NgModule({
@@ -24,7 +29,9 @@ import { PurchaseManagerComponent } from './managers/purchase-manager/purchase-m
     PaymentMethodManagerComponent,
     NotificationManagerComponent,
     SupplierManagerComponent,
-    PurchaseManagerComponent
+    PurchaseManagerComponent,
+    LoginComponent,
+    AdminContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +41,7 @@ import { PurchaseManagerComponent } from './managers/purchase-manager/purchase-m
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [ProjectsClientService, SupplierClientService],
+  providers: [ProjectsClientService, SupplierClientService, RequestersClientService, AuthGuardService, AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
