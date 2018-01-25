@@ -8,6 +8,7 @@
       <mat-form-field class="full-width">
          <input matInput placeholder="Password" type="password" id="password" name="password" [(ngModel)]="password" required>
       </mat-form-field>
+      <button mat-raised-button (click)="toRegister()">Register</button>
       <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Login</button>
       </form>
   </mat-card-content>

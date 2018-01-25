@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './app-material.module';
-import { ProjectsClientService } from './http/projects-client.service';
+import { ResourcesClientService } from './http/resource-client.service';
 import { SupplierClientService } from './http/supplier-client.service';
 import { RequestersClientService } from './http/requesters-client.service';
 import { ResourceManagerComponent } from './managers/resource-manager/resource-manager.component';
@@ -19,6 +19,10 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
 import { AuthenticationService } from './authentication/authentication.service';
 import { AdminContainerComponent } from './admin-container/admin-container.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LocationClientService } from './http/location-client.service';
+import { RegisterComponent } from './register/register.component';
+import { AddResourcesComponent } from './managers/add-resources/add-resources.component';
 
 
 @NgModule({
@@ -31,7 +35,10 @@ import { AdminContainerComponent } from './admin-container/admin-container.compo
     SupplierManagerComponent,
     PurchaseManagerComponent,
     LoginComponent,
-    AdminContainerComponent
+    AdminContainerComponent,
+    NotFoundComponent,
+    RegisterComponent,
+    AddResourcesComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +48,14 @@ import { AdminContainerComponent } from './admin-container/admin-container.compo
     AppRoutingModule,
     MaterialModule
   ],
-  providers: [ProjectsClientService, SupplierClientService, RequestersClientService, AuthGuardService, AuthenticationService],
+  providers: [
+    ResourcesClientService,
+    SupplierClientService,
+    RequestersClientService,
+    AuthGuardService,
+    AuthenticationService,
+    LocationClientService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

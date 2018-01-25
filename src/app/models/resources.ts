@@ -25,3 +25,10 @@ export class ResourceRequested {
         public quantity: number
     ) { }
 }
+
+export class ResourceType {
+    constructor (
+        public resource_type_id: number,
+        public type_name: string
+    ) {}
+}

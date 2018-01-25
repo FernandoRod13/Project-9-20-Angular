@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { ProjectsClientService} from './../../http/projects-client.service';
+import { ResourcesClientService} from './../../http/resource-client.service';
 import { ResourceAvaliable, ResourceRequested } from './../../models/resources';
 @Component({
   selector: 'app-resource-manager',
@@ -16,7 +16,7 @@ export class ResourceManagerComponent implements OnInit, OnDestroy {
   public requestedDataSource = new MatTableDataSource<ResourceRequested>();
   public avaliableDisplayedRows = ['id', 'name', 'category', 'city', 'avaliable', 'price'];
   public requestedDisplayedRows = ['id', 'name', 'category', 'city', 'quantity'];
-  constructor (private client: ProjectsClientService) { }
+  constructor (private client: ResourcesClientService) { }
 
   ngOnInit() {
     this.getResourceAvaliableObserver = this.client.getAllResourcesAvailable().subscribe( resourceList => {

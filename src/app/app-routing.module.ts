@@ -8,12 +8,15 @@ import { PurchaseManagerComponent } from './managers/purchase-manager/purchase-m
 import { SupplierManagerComponent } from './managers/supplier-manager/supplier-manager.component';
 import { LoginComponent } from './login/login.component';
 import { AdminContainerComponent } from './admin-container/admin-container.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
+    { path: 'register', component: RegisterComponent },
     { path: 'admin', redirectTo: '/admin/resources', pathMatch: 'full' },
-    { path: 'admin', canActivate: [AuthGuardService], component: AdminContainerComponent, children: [
+    { path: 'admin', component: AdminContainerComponent, children: [
       { path: 'resources', component: ResourceManagerComponent },
       { path: 'suppliers', component: SupplierManagerComponent },
       { path: 'payments', component: PaymentMethodManagerComponent },
@@ -22,6 +25,7 @@ const appRoutes: Routes = [
       { path: 'notifications', component: NotificationManagerComponent },
     ]},
     { path: '',   redirectTo: '/admin/resources', pathMatch: 'full' },
+    { path: '**', component: NotFoundComponent }
   ];
 
 @NgModule({

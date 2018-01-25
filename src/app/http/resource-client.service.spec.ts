@@ -1,15 +1,15 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { ProjectsClientService } from './projects-client.service';
+import { ResourcesClientService } from './resource-client.service';
 
 describe('ProjectsClientService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ProjectsClientService]
+      providers: [ResourcesClientService]
     });
   });
 
-  it('should be created', inject([ProjectsClientService], (service: ProjectsClientService) => {
+  it('should be created', inject([ResourcesClientService], (service: ResourcesClientService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
@@ -43,6 +43,35 @@ export class AuthenticationService {
 
   public redirect(): string {
     return this.redirectURL;
+  }
+
+  public register(type: number, body: any) {
+    let route = '';
+    switch (type) {
+      case 0:
+        route = 'admin';
+        break;
+      case 1:
+        route = 'suppliers';
+        break;
+      case 2:
+        route = 'requesters';
+        break;
+    }
+    const url = this.baseURL + route;
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    //console.log(body);
+    const request = this.http.post(url, body, {headers: headers});
+    //console.log(request);
+    request.subscribe(
+      data => {
+      console.log(data);
+    },
+    // Errors will call this callback instead:
+    err => {
+      console.log(err);
+    });
   }
 
 }

@@ -1,0 +1,45 @@
+<mat-card class="container">
+  <mat-card-title>Register</mat-card-title>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="register()">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="First Name" type="text" name="first_name" [(ngModel)]="firstName" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Last Name" type="text" name="last_name" [(ngModel)]="lastName" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Address" type="text" name="addess" [(ngModel)]="address" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+          <input matInput placeholder="Phone" type="tel" name="phone" [(ngModel)]="phone" required>
+        </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Email" type="email" name="email" [(ngModel)]="email" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password" required>
+      </mat-form-field>
+      <div class="row">
+        <mat-form-field class="col-6">
+          <mat-select placeholder="Choose City" [(ngModel)]="selectedCity" name="city" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let city of cities" [value]="city.city_id">
+              {{city.city_name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-select placeholder="Choose Account Type" [(ngModel)]="accountType" name="acc_type" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let type of accountTypes" [value]="type.typeValue">
+                {{type.typeName}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.form.valid">Register</button>
+    </form>
+  </mat-card-content>
+</mat-card>

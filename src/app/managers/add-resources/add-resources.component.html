@@ -1,0 +1,40 @@
+<mat-card class="container">
+  <form #newResourceForm="ngForm" (ngSubmit)="submitNewResourceAvailable()">
+    <mat-card-title>Add Resources</mat-card-title>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Resource Name" type="text" name="name" [(ngModel)]="name" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Resource Description" type="text" name="description" [(ngModel)]="description" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Quantity" type="number" name="quantity" [(ngModel)]="qty" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Price" type="number" name="price" [(ngModel)]="price" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <input matInput placeholder="Keywords" type="text" name="keywords" [(ngModel)]="keywords" required>
+      </mat-form-field>
+    <div class="row">
+        <mat-form-field class="col-6">
+          <mat-select placeholder="Choose Supplier" [(ngModel)]="selectedSupplier" name="id" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let sup of suppliers" [value]="sup.supplier_id">
+              {{sup.first_name}} {{sup.last_name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-select placeholder="Choose Resource Type" [(ngModel)]="selectedType" name="res_type" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let type of resourceTypes" [value]="type.resource_type_id">
+                {{type.type_name}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!newResourceForm.form.valid">Submit</button>
+    </form>
+  
+</mat-card>
