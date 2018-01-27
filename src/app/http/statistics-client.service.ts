@@ -9,9 +9,16 @@ export class StatisticsClientService {
   private baseURL = 'https://project-9-20-187720.appspot.com/';
   constructor(private http: HttpClient) { }
 
-  public getDailyRequestedStatistic(): Observable<Object> {
+  public getDailyRequestedStatistic(): Observable<statistic[]> {
     const url = this.baseURL +  'statistics/daily/resources/requested';
-    return this.http.get(url)
+    return this.http.get(url).map( res => {
+      return res['Resource_Available'].map( item => {
+        return new statistic(
+          item.Region,
+          item.Amount
+        );
+      });
+    });
   }
 
   public getDailyAvailableStatistic(): Observable<statistic[]> {
