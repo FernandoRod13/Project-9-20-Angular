@@ -11,10 +11,8 @@ import { SupplierClientService } from './http/supplier-client.service';
 import { RequestersClientService } from './http/requesters-client.service';
 import { ResourceManagerComponent } from './managers/resource-manager/resource-manager.component';
 import { AccountManagerComponent } from './managers/account-manager/account-manager.component';
-import { PaymentMethodManagerComponent } from './managers/payment-method-manager/payment-method-manager.component';
 import { NotificationManagerComponent } from './managers/notification-manager/notification-manager.component';
 import { SupplierManagerComponent } from './managers/supplier-manager/supplier-manager.component';
-import { PurchaseManagerComponent } from './managers/purchase-manager/purchase-manager.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
 import { AuthenticationService } from './authentication/authentication.service';
@@ -26,6 +24,7 @@ import { AddResourcesComponent } from './managers/add-resources/add-resources.co
 import { AddNewRequestComponent } from './managers/add-new-request/add-new-request.component';
 import { NotificationClientService } from './http/notification-client.service';
 import { TransactionsClientService } from './http/transactions-client.service';
+import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 
 
 @NgModule({
@@ -33,16 +32,15 @@ import { TransactionsClientService } from './http/transactions-client.service';
     AppComponent,
     ResourceManagerComponent,
     AccountManagerComponent,
-    PaymentMethodManagerComponent,
     NotificationManagerComponent,
     SupplierManagerComponent,
-    PurchaseManagerComponent,
     LoginComponent,
     AdminContainerComponent,
     NotFoundComponent,
     RegisterComponent,
     AddResourcesComponent,
-    AddNewRequestComponent
+    AddNewRequestComponent,
+    RequestersManagerComponent
   ],
   imports: [
     BrowserModule,

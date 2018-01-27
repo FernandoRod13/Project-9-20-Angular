@@ -18,7 +18,8 @@ export class RequestersClientService {
           item.email,
           item.first_name,
           item.last_name,
-          item.phone
+          item.phone,
+          item.city
         );
       });
     });
