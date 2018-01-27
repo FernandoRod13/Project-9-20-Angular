@@ -39,6 +39,11 @@ export class AuthenticationService {
       });
   }
 
+  public changePassword (email: string, password: string):Promise<Object> {
+    const url = this.baseURL + '/user/changepassword?email=' + email + '&password=' + password;
+    return this.http.get(url).toPromise(); 
+  }
+
   public setRedirect(url: string) {
     this.redirectURL = url;
   }
