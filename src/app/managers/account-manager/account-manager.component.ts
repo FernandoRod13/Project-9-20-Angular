@@ -11,7 +11,7 @@ import { Purchase } from '../../models/purchases';
   styleUrls: ['./account-manager.component.css']
 })
 export class AccountManagerComponent implements OnInit, OnDestroy {
-  private user: User;
+  public user: User;
   private paymentMethodObserver;
   public paymentMethods: PaymentMethod[];
   public paymentMethodDataSource =  new MatTableDataSource<PaymentMethod>();
