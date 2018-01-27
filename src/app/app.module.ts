@@ -24,6 +24,13 @@ import { AddResourcesComponent } from './managers/add-resources/add-resources.co
 import { AddNewRequestComponent } from './managers/add-new-request/add-new-request.component';
 import { NotificationClientService } from './http/notification-client.service';
 import { TransactionsClientService } from './http/transactions-client.service';
+import { StatisticsClientService } from './http/statistics-client.service';
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+import * as FusionCharts from 'fusioncharts';
+import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
+import { FusionChartsModule } from 'angular2-fusioncharts';
+import { StatisticsManagerComponent } from './managers/statistics-manager/statistics-manager.component';
+FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 
 
@@ -40,6 +47,7 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
     RegisterComponent,
     AddResourcesComponent,
     AddNewRequestComponent,
+    StatisticsManagerComponent
     RequestersManagerComponent
   ],
   imports: [
@@ -48,7 +56,8 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    FusionChartsModule
   ],
   providers: [
     ResourcesClientService,
@@ -58,7 +67,8 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
     AuthenticationService,
     LocationClientService,
     NotificationClientService,
-    TransactionsClientService
+    TransactionsClientService,
+    StatisticsClientService
   ],
   bootstrap: [AppComponent]
 })
