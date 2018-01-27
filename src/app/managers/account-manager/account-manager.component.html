@@ -6,6 +6,25 @@
   <h5>{{user.city}}</h5>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="signOut()">Sign Out</button>
+    <button mast-raised-button (click)="showResetPass()">Reset Password</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="container" *ngIf=showResetpassword>
+  <mat-card-title>Reset Password</mat-card-title>
+  <mat-card-content>
+    <form #passwordForm="ngForm" (ngSubmit)="changePassword">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="New password" type="password" id="password" name="password" [(ngModel)]="confrimPassword"required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+         <input matInput placeholder="Confirm Password" type="password" id="confirmpassword" name="confrimPassword" [(ngModel)]="confirmPassword" required>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!passwordForm.form.valid">Reset Password</button>
+      </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="hideResetPass()">Cancel</button>
   </mat-card-actions>
 </mat-card>
 

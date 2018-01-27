@@ -47,7 +47,7 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
     RegisterComponent,
     AddResourcesComponent,
     AddNewRequestComponent,
-    StatisticsManagerComponent
+    StatisticsManagerComponent,
     RequestersManagerComponent
   ],
   imports: [

@@ -20,6 +20,9 @@ export class AccountManagerComponent implements OnInit, OnDestroy {
   public purchaseColumns = ['id', 'resource_name', 'purchasePrice', 'qty', 'supplier', 'date'];
   private purchaseObserver;
   public purchaseList: Purchase[];
+  public password: string;
+  public confirmPassword: string;
+  public showResetpassword:boolean;
 
   constructor(
     private auth: AuthenticationService,
@@ -27,6 +30,7 @@ export class AccountManagerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.showResetpassword = false;
     this.user = this.auth.currentUser;
     this.paymentMethodObserver = this.transactions.getUserPaymetMethod(this.user.uid).subscribe( cards => {
       this.paymentMethods = cards;
@@ -46,5 +50,22 @@ export class AccountManagerComponent implements OnInit, OnDestroy {
   public signOut() {
     this.auth.signOut();
   }
+  public changePassword(){
+    if ( this.password.length> 4 && this.password === this.confirmPassword) {
+      this.auth.changePassword(this.user.email, this.password).then(()=> {
+        this.showResetpassword = false;
+      });
+    }
+  }
+
+  public showResetPass() {
+    this.showResetpassword = true;
+
+  }
+
+  public hideResetPass() {
+    this.showResetpassword = false;
+  }
+
 
 }
