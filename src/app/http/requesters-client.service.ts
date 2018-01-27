@@ -10,7 +10,7 @@ export class RequestersClientService {
   constructor(private http: HttpClient) { }
 
   public getAllRequester(): Observable<Requester[]> {
-    const url = this.baseURL +  'requester';
+    const url = this.baseURL +  'requesters';
     return this.http.get(url).map( res => {
       return res['Requester'].map( item => {
         return new Requester(

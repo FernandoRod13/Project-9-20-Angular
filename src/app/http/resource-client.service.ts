@@ -15,7 +15,7 @@ export class ResourcesClientService {
         return new ResourceAvaliable(
           item.resource_id,
           item.account_id,
-          item.avaliability,
+          item.availability,
           item.category,
           item.city,
           new Date(item.date_added),
@@ -59,29 +59,42 @@ export class ResourcesClientService {
     });
   }
 
-  public addNewResourceAvailable(content: any) {
+  public addNewResourceAvailable(body: any): Promise<Object> {
     const url = this.baseURL + 'resources/available';
     const headers = new HttpHeaders();
-    const body = new URLSearchParams();
-    body.set('name', content.name);
-    body.set('description', content.description);
-    body.set('qty', content.qty);
-    body.set('keywords', content.keywords);
-    body.set('price', content.price);
-    body.set('supplier_id', content.supplier_id);
-    body.set('resource_type_id', content.resource_type_id);
     const options = {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
-    //headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.http.post(url, body.toString(), options).subscribe(// Successful responses call the first callback.
-      data => {
-        console.log(data);
-      },
-      // Errors will call this callback instead:
-      err => {
-        console.log(err);
-      });
+    return this.http.post(url, body, options).toPromise();
+  }
+
+  public addNewResourceRequest(body: any): Promise<Object> {
+    const url = this.baseURL + 'resources/requested';
+    const headers = new HttpHeaders();
+    const options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    };
+    return this.http.post(url, body, options).toPromise();
+  }
+
+  public getSpecificResourceAvailable(id: number): Observable<ResourceAvaliable> {
+    const url = this.baseURL + 'resources/available/' + id;
+    return this.http.get(url).map( res => {
+      const resource = res['Resources'][0];
+      return new ResourceAvaliable(
+        resource.resource_id,
+        resource.account_id,
+        resource.availability,
+        resource.category,
+        resource.city,
+        new Date(resource.date_added),
+        resource.description,
+        new Date(resource.last_update),
+        resource.name,
+        resource.qty,
+        resource.price
+      );
+    });
   }
 
 }

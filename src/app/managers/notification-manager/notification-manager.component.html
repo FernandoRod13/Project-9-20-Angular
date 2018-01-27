@@ -1,3 +1,22 @@
-<p>
-  notification-manager works!
-</p>
+<div *ngIf="!viewingResource">
+    <mat-card *ngFor="let notif of notifications" class="container">
+        <mat-card-title>{{notif.name}}</mat-card-title>
+        <mat-card-content>{{notif.title}} for {{notif.category}}</mat-card-content>
+        <p>{{notif.date | date }}</p>
+        <mat-card-actions>
+          <button mat-raised-button (click)="viewResource(notif.resource_id)">View Resource</button>
+        </mat-card-actions>
+      </mat-card>
+</div>
+
+
+<mat-card *ngIf="viewingResource" class="container">
+  <mat-card-title>{{resource.name}}</mat-card-title>
+  <mat-card-content>
+    <p>{{resource.description}}</p>
+    <p>{{reosurce.price | currency}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+      <button mat-raised-button (click)="closwReosurce()">Close</button>
+    </mat-card-actions>
+</mat-card>

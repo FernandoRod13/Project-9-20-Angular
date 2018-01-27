@@ -1,0 +1,37 @@
+<mat-card class="container">
+    <form #newResourceRequestForm="ngForm" (ngSubmit)="submitNewResourceRequest()">
+      <mat-card-title>Add Resources Requested</mat-card-title>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Resource Name" type="text" name="name" [(ngModel)]="name" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Resource Description" type="text" name="description" [(ngModel)]="description" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Quantity" type="number" name="quantity" [(ngModel)]="qty" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+          <input matInput placeholder="Keywords" type="text" name="keywords" [(ngModel)]="keywords" required>
+        </mat-form-field>
+      <div class="row">
+          <mat-form-field class="col-6">
+            <mat-select placeholder="Choose Requester" [(ngModel)]="selectedRequester" name="id" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let req of requesters" [value]="req.requester_id">
+                {{req.first_name}} {{req.last_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-6">
+            <mat-select placeholder="Choose Resource Type" [(ngModel)]="selectedType" name="res_type" required>
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let type of resourceTypes" [value]="type.resource_type_id">
+                  {{type.type_name}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!newResourceRequestForm.form.valid">Submit</button>
+      </form>
+    
+  </mat-card>

@@ -51,9 +51,14 @@ export class AddResourcesComponent implements OnInit, OnDestroy {
       qty: this.qty,
       price: this.price,
       supplier_id: this.selectedSupplier,
-      resourse_type_id: this.selectedType
+      resource_type: this.selectedType
     };
-    this.res.addNewResourceAvailable(body);
+    console.log(body);
+    this.res.addNewResourceAvailable(body).then( data => {
+      console.log(data);
+    }).catch( error => {
+      console.log(error);
+    });
   }
 
 }

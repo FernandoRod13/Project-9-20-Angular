@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
-import { Admin } from './../models/admin';
+import { User } from './../models/user';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
@@ -11,30 +12,31 @@ export class AuthenticationService {
   private uid: number;
   private isLoggedIn = false;
   private redirectURL: string;
-  constructor ( private http: HttpClient ) { }
+  public currentUser: User;
+  constructor (
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   public loggedIn(): boolean {
     return this.isLoggedIn;
   }
 
-  public login (email: string, password: string): Observable<Admin> {
+  public login (email: string, password: string): Observable<User> {
     const url = this.baseURL + '/login?email=' + email + '&password=' + password;
     return this.http.get(url).map( data => {
       const admin = data['Administrator'][0];
         this.isLoggedIn = true;
-        return new Admin(
+        this.currentUser = new User(
           admin.admin_id,
-          admin.email,
           admin.first_name,
           admin.last_name,
+          admin.email,
           admin.phone,
           admin.city
         );
+        return this.currentUser;
       });
-  }
-
-  public logout() {
-    this.isLoggedIn = false;
   }
 
   public setRedirect(url: string) {
@@ -45,7 +47,7 @@ export class AuthenticationService {
     return this.redirectURL;
   }
 
-  public register(type: number, body: any) {
+  public register(type: number, body: any): Promise<Object> {
     let route = '';
     switch (type) {
       case 0:
@@ -60,18 +62,13 @@ export class AuthenticationService {
     }
     const url = this.baseURL + route;
     const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    //console.log(body);
-    const request = this.http.post(url, body, {headers: headers});
-    //console.log(request);
-    request.subscribe(
-      data => {
-      console.log(data);
-    },
-    // Errors will call this callback instead:
-    err => {
-      console.log(err);
-    });
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(url, body, {headers: headers}).toPromise();
+  }
+
+  public signOut() {
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
   }
 
 }

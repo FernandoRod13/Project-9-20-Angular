@@ -16,9 +16,15 @@ export class ResourceManagerComponent implements OnInit, OnDestroy {
   public requestedDataSource = new MatTableDataSource<ResourceRequested>();
   public avaliableDisplayedRows = ['id', 'name', 'category', 'city', 'avaliable', 'price'];
   public requestedDisplayedRows = ['id', 'name', 'category', 'city', 'quantity'];
+  public addingResource: boolean;
+  public addingRequest: boolean;
+  public buttonLabel: string;
   constructor (private client: ResourcesClientService) { }
 
   ngOnInit() {
+    this.addingResource = false;
+    this.addingRequest = false;
+    this.buttonLabel = 'Add';
     this.getResourceAvaliableObserver = this.client.getAllResourcesAvailable().subscribe( resourceList => {
       this.resourcesAvaliable = resourceList;
       this.availableDataSource.data = this.resourcesAvaliable;
@@ -32,6 +38,19 @@ export class ResourceManagerComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.getResourceAvaliableObserver.unsubscribe();
     this.getResourceRequestedObserver.unsubscribe();
+  }
+
+  public addingResourceStateChange() {
+    this.addingResource = true;
+  }
+
+  public addingRequestStateChange() {
+    this.addingRequest = true;
+  }
+
+  public closeAddingWindows() {
+    this.addingRequest = false;
+    this.addingResource = false;
   }
 
 }

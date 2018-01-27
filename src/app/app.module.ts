@@ -23,6 +23,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LocationClientService } from './http/location-client.service';
 import { RegisterComponent } from './register/register.component';
 import { AddResourcesComponent } from './managers/add-resources/add-resources.component';
+import { AddNewRequestComponent } from './managers/add-new-request/add-new-request.component';
+import { NotificationClientService } from './http/notification-client.service';
+import { TransactionsClientService } from './http/transactions-client.service';
 
 
 @NgModule({
@@ -38,7 +41,8 @@ import { AddResourcesComponent } from './managers/add-resources/add-resources.co
     AdminContainerComponent,
     NotFoundComponent,
     RegisterComponent,
-    AddResourcesComponent
+    AddResourcesComponent,
+    AddNewRequestComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,9 @@ import { AddResourcesComponent } from './managers/add-resources/add-resources.co
     RequestersClientService,
     AuthGuardService,
     AuthenticationService,
-    LocationClientService
+    LocationClientService,
+    NotificationClientService,
+    TransactionsClientService
   ],
   bootstrap: [AppComponent]
 })

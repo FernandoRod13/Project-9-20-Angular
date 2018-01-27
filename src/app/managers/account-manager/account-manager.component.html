@@ -1,3 +1,42 @@
-<p>
-  account-manager works!
-</p>
+<mat-card class="container">
+  <mat-card-title>Account Info</mat-card-title>
+  <h2>{{user.first_name}} {{user.last_name}}</h2>
+  <h3>{{user.email}}</h3>
+  <h4>{{user.phone}}</h4>
+  <h5>{{user.city}}</h5>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="signOut()">Sign Out</button>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="container">
+  <mat-card-title>
+    Payment Methods
+  </mat-card-title>
+  <mat-card-content>
+      <mat-table #table [dataSource]="paymentMethodDataSource">
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let payment"> {{payment.id}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="cardHolder">
+            <mat-header-cell *matHeaderCellDef> Card Holder </mat-header-cell>
+            <mat-cell *matCellDef="let payment"> {{payment.cardHolder}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="cardNumber">
+            <mat-header-cell *matHeaderCellDef> Card Number </mat-header-cell>
+            <mat-cell *matCellDef="let payment"> {{payment.cardNumber}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="zip">
+            <mat-header-cell *matHeaderCellDef> Zip Code </mat-header-cell>
+            <mat-cell *matCellDef="let payment"> {{payment.zipCode}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef> Expiration Date </mat-header-cell>
+            <mat-cell *matCellDef="let payment"> {{payment.expirationDate | date}} </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="paymenMethodColumns"></mat-header-row>
+          <mat-row *matRowDef="let payment; columns: paymenMethodColumns"></mat-row>
+        </mat-table>
+  </mat-card-content>
+</mat-card>

@@ -16,7 +16,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent },
     { path: 'admin', redirectTo: '/admin/resources', pathMatch: 'full' },
-    { path: 'admin', component: AdminContainerComponent, children: [
+    { path: 'admin', canActivate: [AuthGuardService], component: AdminContainerComponent, children: [
       { path: 'resources', component: ResourceManagerComponent },
       { path: 'suppliers', component: SupplierManagerComponent },
       { path: 'payments', component: PaymentMethodManagerComponent },
