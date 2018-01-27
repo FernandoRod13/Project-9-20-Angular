@@ -11,6 +11,7 @@ import { AdminContainerComponent } from './admin-container/admin-container.compo
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
 import { RegisterComponent } from './register/register.component';
+import { StatisticsManagerComponent } from './managers/statistics-manager/statistics-manager.component'
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
       { path: 'purchases', component: PurchaseManagerComponent },
       { path: 'account', component: AccountManagerComponent },
       { path: 'notifications', component: NotificationManagerComponent },
+      { path: 'statistics', component: StatisticsManagerComponent }
     ]},
     { path: '',   redirectTo: '/admin/resources', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }
