@@ -11,10 +11,8 @@ import { SupplierClientService } from './http/supplier-client.service';
 import { RequestersClientService } from './http/requesters-client.service';
 import { ResourceManagerComponent } from './managers/resource-manager/resource-manager.component';
 import { AccountManagerComponent } from './managers/account-manager/account-manager.component';
-import { PaymentMethodManagerComponent } from './managers/payment-method-manager/payment-method-manager.component';
 import { NotificationManagerComponent } from './managers/notification-manager/notification-manager.component';
 import { SupplierManagerComponent } from './managers/supplier-manager/supplier-manager.component';
-import { PurchaseManagerComponent } from './managers/purchase-manager/purchase-manager.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
 import { AuthenticationService } from './authentication/authentication.service';
@@ -32,8 +30,8 @@ import * as FusionCharts from 'fusioncharts';
 import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
 import { FusionChartsModule } from 'angular2-fusioncharts';
 import { StatisticsManagerComponent } from './managers/statistics-manager/statistics-manager.component';
-
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
+import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 
 
 @NgModule({
@@ -41,10 +39,8 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     AppComponent,
     ResourceManagerComponent,
     AccountManagerComponent,
-    PaymentMethodManagerComponent,
     NotificationManagerComponent,
     SupplierManagerComponent,
-    PurchaseManagerComponent,
     LoginComponent,
     AdminContainerComponent,
     NotFoundComponent,
@@ -52,6 +48,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
     AddResourcesComponent,
     AddNewRequestComponent,
     StatisticsManagerComponent
+    RequestersManagerComponent
   ],
   imports: [
     BrowserModule,

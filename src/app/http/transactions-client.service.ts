@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { PaymentMethod } from './../models/paymentMethod';
+import { Purchase } from '../models/purchases';
 
 @Injectable()
 export class TransactionsClientService {
@@ -23,4 +24,24 @@ export class TransactionsClientService {
       });
     });
   }
+
+  public getBuyerPurchaces(id: number): Observable<Purchase[]> {
+    const url = this.baseURL + 'transactions/getBuyerTransaction?requesterid=' + id;
+    return this.http.get(url).map( res => {
+      return res['Transactions'].map(item => {
+        return new Purchase(
+          item.purchase_id,
+          item.supplier_first_name + ' ' + item.supplier_last_name,
+          item.supplier_id,
+          new Date(item.purchase_date),
+          item.resource_id,
+          item.resource_name,
+          item.resource_description,
+          item.purchase_price,
+          item.quantity
+        );
+      });
+    });
+  }
+
 }

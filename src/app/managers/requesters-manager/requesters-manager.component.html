@@ -1,0 +1,31 @@
+<mat-card class="table-container mat-elevation-z8">
+    <mat-card-title>
+      Requesters
+    </mat-card-title>
+    <mat-card-content>
+        <mat-table #table [dataSource]="requesterdataSource" class="mat-table">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+              <mat-cell *matCellDef="let requester"> {{requester.requester_id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>  Name </mat-header-cell>
+              <mat-cell *matCellDef="let requester"> {{requester.first_name}} {{requester.last_name}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+              <mat-cell *matCellDef="let requester"> {{requester.email}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+                <mat-cell *matCellDef="let requester"> {{requester.phone}} </mat-cell>
+              </ng-container>
+            <ng-container matColumnDef="city">
+              <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+              <mat-cell *matCellDef="let requester"> {{requester.city}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="requesterdataColumns"></mat-header-row>
+            <mat-row *matRowDef="let requester; columns: requesterdataColumns"></mat-row>
+          </mat-table>
+    </mat-card-content>
+  </mat-card>

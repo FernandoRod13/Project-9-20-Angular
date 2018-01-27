@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ResourceManagerComponent } from './managers/resource-manager/resource-manager.component';
 import { AccountManagerComponent } from './managers/account-manager/account-manager.component';
 import { NotificationManagerComponent } from './managers/notification-manager/notification-manager.component';
-import { PaymentMethodManagerComponent } from './managers/payment-method-manager/payment-method-manager.component';
-import { PurchaseManagerComponent } from './managers/purchase-manager/purchase-manager.component';
 import { SupplierManagerComponent } from './managers/supplier-manager/supplier-manager.component';
 import { LoginComponent } from './login/login.component';
 import { AdminContainerComponent } from './admin-container/admin-container.component';
@@ -12,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
 import { RegisterComponent } from './register/register.component';
 import { StatisticsManagerComponent } from './managers/statistics-manager/statistics-manager.component'
+import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -20,9 +19,8 @@ const appRoutes: Routes = [
     { path: 'admin', canActivate: [AuthGuardService], component: AdminContainerComponent, children: [
       { path: 'resources', component: ResourceManagerComponent },
       { path: 'suppliers', component: SupplierManagerComponent },
-      { path: 'payments', component: PaymentMethodManagerComponent },
-      { path: 'purchases', component: PurchaseManagerComponent },
       { path: 'account', component: AccountManagerComponent },
+      { path: 'requesters', component: RequestersManagerComponent},
       { path: 'notifications', component: NotificationManagerComponent },
       { path: 'statistics', component: StatisticsManagerComponent }
     ]},
