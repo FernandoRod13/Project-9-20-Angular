@@ -29,7 +29,6 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
 import * as FusionCharts from 'fusioncharts';
 import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
 import { FusionChartsModule } from 'angular2-fusioncharts';
-import { StatisticsManagerComponent } from './managers/statistics-manager/statistics-manager.component';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 
@@ -47,7 +46,6 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
     RegisterComponent,
     AddResourcesComponent,
     AddNewRequestComponent,
-    StatisticsManagerComponent,
     RequestersManagerComponent
   ],
   imports: [
