@@ -5,6 +5,7 @@ import { User } from './../../models/user';
 import { PaymentMethod } from '../../models/paymentMethod';
 import { MatTableDataSource } from '@angular/material';
 import { Purchase } from '../../models/purchases';
+import { StatusMessageService } from './../../error-handling/status-message.service';
 @Component({
   selector: 'app-account-manager',
   templateUrl: './account-manager.component.html',
@@ -22,15 +23,21 @@ export class AccountManagerComponent implements OnInit, OnDestroy {
   public purchaseList: Purchase[];
   public password: string;
   public confirmPassword: string;
-  public showResetpassword:boolean;
+  public showResetpassword: boolean;
+  public minDate = new Date();
+  public newCard: PaymentMethod;
+  public showNewCardForm: boolean;
 
   constructor(
     private auth: AuthenticationService,
-    private transactions: TransactionsClientService
+    private transactions: TransactionsClientService,
+    private status: StatusMessageService
   ) { }
 
   ngOnInit() {
     this.showResetpassword = false;
+    this.showNewCardForm = false;
+    this.newCard = PaymentMethod.emptyCard();
     this.user = this.auth.currentUser;
     this.paymentMethodObserver = this.transactions.getUserPaymetMethod(this.user.uid).subscribe( cards => {
       this.paymentMethods = cards;
@@ -50,9 +57,9 @@ export class AccountManagerComponent implements OnInit, OnDestroy {
   public signOut() {
     this.auth.signOut();
   }
-  public changePassword(){
-    if ( this.password.length> 4 && this.password === this.confirmPassword) {
-      this.auth.changePassword(this.user.email, this.password).then(()=> {
+  public changePassword() {
+    if ( this.password.length > 4 && this.password === this.confirmPassword) {
+      this.auth.changePassword(this.user.email, this.password).then(() => {
         this.showResetpassword = false;
       });
     }
@@ -67,5 +74,24 @@ export class AccountManagerComponent implements OnInit, OnDestroy {
     this.showResetpassword = false;
   }
 
+  public showNewCard() {
+    this.showNewCardForm = true;
+    this.newCard = PaymentMethod.emptyCard();
+  }
+
+  public hideNewCard() {
+    this.showNewCardForm = false;
+  }
+
+  public addNewCard() {
+    this.transactions.addNewPaymentMethod(this.newCard, this.user.uid).then( card => {
+      this.status.success('Successfuly added new payment method.');
+      this.hideNewCard();
+      this.paymentMethods.push(card);
+    }).catch( error => {
+      console.log(error);
+      this.status.error('Failed to add payment method.');
+    });
+  }
 
 }

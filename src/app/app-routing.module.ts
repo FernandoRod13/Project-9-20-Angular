@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
 import { RequesterContainerComponent} from './requester/requester-container/requester-container.component';
+import { BuyResourceComponent } from './requester/buy-resource/buy-resource.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent },
@@ -31,6 +32,7 @@ const appRoutes: Routes = [
     ]},
     { path: 'requester', redirectTo: '/requester/account', pathMatch: 'full' },
     { path: 'requester', canActivate: [AuthGuardService], component: RequesterContainerComponent, children: [
+      { path: 'purchase', component: BuyResourceComponent },
       { path: 'supplier', component: SupplierManagerComponent },
       { path: 'account', component: AccountManagerComponent },
       { path: 'notifications', component: NotificationManagerComponent }

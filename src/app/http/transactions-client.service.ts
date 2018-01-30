@@ -44,4 +44,36 @@ export class TransactionsClientService {
     });
   }
 
+  public addNewPaymentMethod (card: PaymentMethod, uid: number): Promise<PaymentMethod> {
+    const body = {
+      accountid: uid,
+      card_holder: card.cardHolder,
+      card_number: card.cardNumber,
+      expiration_date: card.expirationDate,
+      zip_code: card.zipCode
+    };
+    const url = this.baseURL + 'transactions/addPaymentMethod';
+    return this.http.post(url, body).map( res => {
+      console.log(res);
+      const newCard = res['PaymentMethod'];
+      return new PaymentMethod(
+        newCard.payment_method_id,
+        newCard.card_holder,
+        newCard.card_number,
+        newCard.zip_code,
+        new Date(newCard.expiration_date)
+      );
+    }).toPromise();
+  }
+
+  public purchaseResource (amount: number, resourceID: number, requesterID: number): Promise<Object> {
+    const body = {
+      resource_id: resourceID,
+      purchase_qty: amount,
+      requester_id: requesterID
+    };
+    const url = this.baseURL + 'transactions/buyResource';
+    return this.http.post(url, body).toPromise();
+  }
+
 }

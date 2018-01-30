@@ -34,6 +34,7 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
 import { StatusMessageService } from './error-handling/status-message.service';
 import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
 import { RequesterContainerComponent } from './requester/requester-container/requester-container.component';
+import { BuyResourceComponent } from './requester/buy-resource/buy-resource.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { RequesterContainerComponent } from './requester/requester-container/req
     AddNewRequestComponent,
     RequestersManagerComponent,
     SupplierContainerComponent,
-    RequesterContainerComponent
+    RequesterContainerComponent,
+    BuyResourceComponent
   ],
   imports: [
     BrowserModule,
