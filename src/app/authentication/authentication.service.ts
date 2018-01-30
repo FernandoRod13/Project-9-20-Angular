@@ -22,7 +22,7 @@ export class AuthenticationService {
     return this.isLoggedIn;
   }
 
-  public login (email: string, password: string): Observable<User> {
+  public login (email: string, password: string): Promise<User> {
     const url = this.baseURL + '/login?email=' + email + '&password=' + password;
     return this.http.get(url).map( data => {
       const admin = data['Administrator'][0];
@@ -33,15 +33,16 @@ export class AuthenticationService {
           admin.last_name,
           admin.email,
           admin.phone,
-          admin.city
+          admin.city,
+          admin.type
         );
         return this.currentUser;
-      });
+      }).toPromise();
   }
 
   public changePassword (email: string, password: string):Promise<Object> {
     const url = this.baseURL + '/user/changepassword?email=' + email + '&password=' + password;
-    return this.http.get(url).toPromise(); 
+    return this.http.get(url).toPromise();
   }
 
   public setRedirect(url: string) {

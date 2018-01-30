@@ -31,6 +31,9 @@ import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
 import { FusionChartsModule } from 'angular2-fusioncharts';
 FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
+import { StatusMessageService } from './error-handling/status-message.service';
+import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
+import { RequesterContainerComponent } from './requester/requester-container/requester-container.component';
 
 
 @NgModule({
@@ -46,7 +49,9 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
     RegisterComponent,
     AddResourcesComponent,
     AddNewRequestComponent,
-    RequestersManagerComponent
+    RequestersManagerComponent,
+    SupplierContainerComponent,
+    RequesterContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +71,8 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
     LocationClientService,
     NotificationClientService,
     TransactionsClientService,
-    StatisticsClientService
+    StatisticsClientService,
+    StatusMessageService
   ],
   bootstrap: [AppComponent]
 })

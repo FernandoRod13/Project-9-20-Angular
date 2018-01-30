@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from './../authentication/authentication.service'; 
+import { AuthenticationService } from './../authentication/authentication.service';
 import { Router } from '@angular/router';
+import { StatusMessageService } from './../error-handling/status-message.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,30 +13,34 @@ export class LoginComponent implements OnInit {
   public password: string;
   constructor(
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private status: StatusMessageService
   ) { }
 
   ngOnInit() {
   }
 
   public login() {
-    this.auth.login(this.email, this.password).subscribe( admin => {
-      console.log(admin);
-      if (admin) {
-        const redirect = this.auth.redirect();
-        if (redirect) {
-          this.router.navigate([redirect]);
-        }else {
-          this.router.navigate(['/admin']);
-        }
+    this.auth.login(this.email, this.password).then( data => {
+      console.log(data);
+      if ( data.type === 'Requester') {
+        this.status.success('Logged in succesfully!');
+        this.router.navigate(['/requester/account']);
+      } else if (data.type === 'Supplier' ) {
+        this.status.success('Logged in succesfully!');
+        this.router.navigate(['/supplier/account']);
+      } else if (data.type === 'Administrator' ) {
+        this.status.success('Logged in succesfully!');
+        this.router.navigate(['/admin/account']);
       }else {
-        console.log('failed');
+        this.status.error('Invalid account type');
       }
+    }).catch(error => {
+      this.status.error('Invalid credentials :(');
     });
   }
 
   public toRegister() {
-    console.log('yes');
     this.router.navigate(['/register']);
   }
 

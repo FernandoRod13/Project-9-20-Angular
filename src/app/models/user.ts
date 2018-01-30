@@ -5,6 +5,7 @@ export class User {
         public last_name: string,
         public email: string,
         public city: string,
-        public phone: string
+        public phone: string,
+        public type: string
     ) { }
 }

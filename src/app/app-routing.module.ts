@@ -10,16 +10,29 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './authentication/auth-guard.service';
 import { RegisterComponent } from './register/register.component';
 import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
-
+import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
+import { RequesterContainerComponent} from './requester/requester-container/requester-container.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent },
-    { path: 'admin', redirectTo: '/admin/resources', pathMatch: 'full' },
+    { path: 'admin', redirectTo: '/admin/account', pathMatch: 'full' },
     { path: 'admin', canActivate: [AuthGuardService], component: AdminContainerComponent, children: [
       { path: 'resources', component: ResourceManagerComponent },
       { path: 'suppliers', component: SupplierManagerComponent },
       { path: 'account', component: AccountManagerComponent },
       { path: 'requesters', component: RequestersManagerComponent},
+      { path: 'notifications', component: NotificationManagerComponent }
+    ]},
+    { path: 'supplier', redirectTo: '/supplier/account', pathMatch: 'full' },
+    { path: 'supplier', canActivate: [AuthGuardService], component: SupplierContainerComponent, children: [
+      { path: 'requesters', component: RequestersManagerComponent},
+      { path: 'account', component: AccountManagerComponent },
+      { path: 'notifications', component: NotificationManagerComponent }
+    ]},
+    { path: 'requester', redirectTo: '/requester/account', pathMatch: 'full' },
+    { path: 'requester', canActivate: [AuthGuardService], component: RequesterContainerComponent, children: [
+      { path: 'supplier', component: SupplierManagerComponent },
+      { path: 'account', component: AccountManagerComponent },
       { path: 'notifications', component: NotificationManagerComponent }
     ]},
     { path: '',   redirectTo: '/admin/resources', pathMatch: 'full' },
