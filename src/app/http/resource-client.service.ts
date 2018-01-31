@@ -97,4 +97,25 @@ export class ResourcesClientService {
     });
   }
 
+  public getResourcesBySupplier (supplier_id: number): Promise<ResourceAvaliable[]> {
+    const url = this.baseURL + 'resources/available/supplier/' + supplier_id;
+    return this.http.get(url).map( res => {
+      return res['Resources'].map(item => {
+        return new ResourceAvaliable(
+          item.resource_id,
+          item.account_id,
+          item.availability,
+          item.category,
+          item.city,
+          new Date(item.date_added),
+          item.description,
+          new Date(item.last_update),
+          item.name,
+          item.qty,
+          item.price
+        );
+      });
+    }).toPromise();
+  }
+
 }

@@ -1,4 +1,4 @@
-<mat-card class="table-container mat-elevation-z8">
+<mat-card class="table-container mat-elevation-z8" *ngIf="!showSupplier">
     <mat-card-header>
       <mat-card-title>Suppliers</mat-card-title>
     </mat-card-header>
@@ -23,7 +23,21 @@
         <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
         <mat-cell *matCellDef="let supplier"> {{supplier.phone}} </mat-cell>
       </ng-container>
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Supplier Profile </mat-header-cell>
+        <mat-cell *matCellDef="let supplier"> 
+          <button mat-raised-button (click)="viewSupplier(supplier.supplier_id)">View</button>
+        </mat-cell>
+      </ng-container>
       <mat-header-row *matHeaderRowDef="displayedRows"></mat-header-row>
       <mat-row *matRowDef="let supplier; columns: displayedRows"></mat-row>
     </mat-table>
   </mat-card>
+  
+  <div class="container" *ngIf="showSupplier">
+    <button mat-raised-button color="red" *ngIf="showSupplier" (click)="hideSupplier()"> Close </button>
+  </div>
+
+  <app-supplier-profile [accountID]="supplier_id" *ngIf="showSupplier"></app-supplier-profile>
+
+

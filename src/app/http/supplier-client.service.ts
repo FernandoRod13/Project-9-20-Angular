@@ -25,4 +25,27 @@ export class SupplierClientService {
     });
   }
 
+  public getSupplierInfo (id: number): Promise<Supplier> {
+    const url = this.baseURL + 'suppliers/' + id;
+    return this.http.get(url).map( res => {
+      return res['Supplier'].map(item => {
+        return new Supplier(
+          item.city,
+          item.email,
+          item.first_name,
+          item.last_name,
+          item.phone,
+          item.supplier_id
+        );
+      })[0];
+    }).toPromise();
+  }
+
+  public getSupplierID( accountID: number): Promise<number> {
+    const url = this.baseURL + 'getSupplierId/' + accountID;
+    return this.http.get(url).map( res => {
+      return res['id'];
+    }).toPromise();
+  }
+
 }

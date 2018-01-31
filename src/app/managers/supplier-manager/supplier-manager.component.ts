@@ -11,12 +11,15 @@ import { Observable } from 'rxjs/Observable';
 })
 export class SupplierManagerComponent implements OnInit, OnDestroy {
   public suppliers: Supplier[];
-  public displayedRows = ['id', 'name', 'email', 'phone', 'city'];
+  public displayedRows = ['id', 'name', 'email', 'phone', 'city', 'action'];
   public dataSource = new MatTableDataSource<Supplier>();
   private supplierObserver;
+  public supplier_id: number;
+  public showSupplier: boolean;
   constructor (private client: SupplierClientService) { }
 
   ngOnInit() {
+    this.showSupplier = false;
     this.supplierObserver = this.client.getAllSuppliers().subscribe(supplierList => {
       this.suppliers = supplierList;
       this.dataSource.data = this.suppliers;
@@ -25,6 +28,16 @@ export class SupplierManagerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.supplierObserver.unsubscribe();
+  }
+
+  viewSupplier(id) {
+    this.supplier_id = id;
+    this.showSupplier = true;
+  }
+
+  hideSupplier() {
+    this.supplier_id = -1;
+    this.showSupplier = false;
   }
 
 }

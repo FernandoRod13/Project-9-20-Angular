@@ -35,6 +35,7 @@ import { StatusMessageService } from './error-handling/status-message.service';
 import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
 import { RequesterContainerComponent } from './requester/requester-container/requester-container.component';
 import { BuyResourceComponent } from './requester/buy-resource/buy-resource.component';
+import { SupplierProfileComponent } from './managers/supplier-profile/supplier-profile.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { BuyResourceComponent } from './requester/buy-resource/buy-resource.comp
     RequestersManagerComponent,
     SupplierContainerComponent,
     RequesterContainerComponent,
-    BuyResourceComponent
+    BuyResourceComponent,
+    SupplierProfileComponent
   ],
   imports: [
     BrowserModule,
