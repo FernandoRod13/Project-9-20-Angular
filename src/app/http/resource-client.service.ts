@@ -65,6 +65,7 @@ export class ResourcesClientService {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
+    console.log(body);
     return this.http.post(url, body, options).toPromise();
   }
 
@@ -74,6 +75,7 @@ export class ResourcesClientService {
     const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     };
+    console.log(body);
     return this.http.post(url, body, options).toPromise();
   }
 

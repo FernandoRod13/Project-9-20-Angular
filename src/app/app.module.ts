@@ -25,18 +25,16 @@ import { AddNewRequestComponent } from './managers/add-new-request/add-new-reque
 import { NotificationClientService } from './http/notification-client.service';
 import { TransactionsClientService } from './http/transactions-client.service';
 import { StatisticsClientService } from './http/statistics-client.service';
-import * as Charts from 'fusioncharts/fusioncharts.charts';
-import * as FusionCharts from 'fusioncharts';
-import * as FintTheme from 'fusioncharts/themes/fusioncharts.theme.fint';
-import { FusionChartsModule } from 'angular2-fusioncharts';
-FusionChartsModule.fcRoot(FusionCharts, Charts, FintTheme);
 import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 import { StatusMessageService } from './error-handling/status-message.service';
 import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
 import { RequesterContainerComponent } from './requester/requester-container/requester-container.component';
 import { BuyResourceComponent } from './requester/buy-resource/buy-resource.component';
 import { SupplierProfileComponent } from './managers/supplier-profile/supplier-profile.component';
-
+import { StatisticsViewerComponent } from './managers/statistics-viewer/statistics-viewer.component';
+import * as Chart from 'chart.js';
+import { AgmCoreModule } from '@agm/core';
+import { TransactionsViewerComponent } from './managers/transactions-viewer/transactions-viewer.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +53,9 @@ import { SupplierProfileComponent } from './managers/supplier-profile/supplier-p
     SupplierContainerComponent,
     RequesterContainerComponent,
     BuyResourceComponent,
-    SupplierProfileComponent
+    SupplierProfileComponent,
+    StatisticsViewerComponent,
+    TransactionsViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +64,9 @@ import { SupplierProfileComponent } from './managers/supplier-profile/supplier-p
     FormsModule,
     AppRoutingModule,
     MaterialModule,
-    FusionChartsModule
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyByLemrjRoy6tmbEIQA4UyuegXwmwDkJc4'
+    })
   ],
   providers: [
     ResourcesClientService,

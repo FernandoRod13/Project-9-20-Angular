@@ -1,0 +1,35 @@
+<mat-card class="container">
+    <mat-card-title>
+      Transaction List
+    </mat-card-title>
+    <mat-card-content>
+        <mat-table #table [dataSource]="purchasesDataSource">
+            <ng-container matColumnDef="id">
+              <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+              <mat-cell *matCellDef="let purchase"> {{purchase.purchase_id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="resource_name">
+              <mat-header-cell *matHeaderCellDef> Resource Name </mat-header-cell>
+              <mat-cell *matCellDef="let purchase"> {{purchase.resource_name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="purchasePrice">
+              <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
+              <mat-cell *matCellDef="let purchase"> {{purchase.purchase_price | currency}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="qty">
+                <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+                <mat-cell *matCellDef="let purchase"> {{purchase.quantity}} </mat-cell>
+              </ng-container>
+            <ng-container matColumnDef="supplier">
+              <mat-header-cell *matHeaderCellDef> Supplier </mat-header-cell>
+              <mat-cell *matCellDef="let purchase"> {{purchase.supplier_name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="date">
+              <mat-header-cell *matHeaderCellDef> Purchase Date </mat-header-cell>
+              <mat-cell *matCellDef="let purchase"> {{purchase.date | date}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="purchaseColumns"></mat-header-row>
+            <mat-row *matRowDef="let purchase; columns: purchaseColumns"></mat-row>
+          </mat-table>
+    </mat-card-content>
+  </mat-card>

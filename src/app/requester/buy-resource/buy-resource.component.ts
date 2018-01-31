@@ -6,6 +6,7 @@ import { StatusMessageService } from './../../error-handling/status-message.serv
 import { MatTableDataSource } from '@angular/material';
 import { AuthenticationService } from './../../authentication/authentication.service';
 import { Purchase } from '../../models/purchases';
+import { RequestersClientService } from './../../http/requesters-client.service';
 @Component({
   selector: 'app-buy-resource',
   templateUrl: './buy-resource.component.html',
@@ -16,7 +17,6 @@ export class BuyResourceComponent implements OnInit, OnDestroy {
   public resourcesAvailable: ResourceAvaliable[];
   public selectedResource: ResourceAvaliable;
   public amount: number;
-  public id: number;
   public purchasesDataSource = new MatTableDataSource<Purchase>();
   public purchaseColumns = ['id', 'resource_name', 'purchasePrice', 'qty', 'supplier', 'date'];
   private purchaseObserver;
@@ -27,7 +27,8 @@ export class BuyResourceComponent implements OnInit, OnDestroy {
     private resources: ResourcesClientService,
     private transactions: TransactionsClientService,
     private status: StatusMessageService,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private requesters: RequestersClientService
   ) { }
 
   ngOnInit() {
@@ -49,16 +50,20 @@ export class BuyResourceComponent implements OnInit, OnDestroy {
   }
 
   public purchase() {
-    if (this.selectedResource.available >= this.amount && this.amount > 0) {
-      this.transactions.purchaseResource(this.amount, this.selectedResource.resource_id, this.id).then(() => {
-        this.status.success('Successfuly purchased a resource');
-        this.hidePurchase();
-      }).catch(error => {
-        this.status.error('Unsucessfully Purchased resource.');
-      });
-    }else {
-      this.status.error('Error: Insufficient resources for this purchase.');
-    }
+    this.requesters.getRequesterID(this.auth.currentUser.uid).then( id => {
+      if (this.selectedResource.available >= this.amount && this.amount > 0) {
+        this.transactions.purchaseResource(this.amount, this.selectedResource.resource_id, id).then(() => {
+          this.status.success('Successfuly purchased a resource');
+          this.hidePurchase();
+        }).catch(error => {
+          this.status.error('Unsucessfully Purchased resource.');
+        });
+      }else {
+        this.status.error('Error: Insufficient resources for this purchase.');
+      }
+    }).catch(error => {
+      this.status.error(error.message);
+    });
   }
 
   public showPurchase() {

@@ -13,6 +13,8 @@ import { RequestersManagerComponent } from './managers/requesters-manager/reques
 import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
 import { RequesterContainerComponent} from './requester/requester-container/requester-container.component';
 import { BuyResourceComponent } from './requester/buy-resource/buy-resource.component';
+import { StatisticsViewerComponent } from './managers/statistics-viewer/statistics-viewer.component';
+import { TransactionsViewerComponent } from './managers/transactions-viewer/transactions-viewer.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent },
@@ -22,7 +24,9 @@ const appRoutes: Routes = [
       { path: 'suppliers', component: SupplierManagerComponent },
       { path: 'account', component: AccountManagerComponent },
       { path: 'requesters', component: RequestersManagerComponent},
-      { path: 'notifications', component: NotificationManagerComponent }
+      { path: 'notifications', component: NotificationManagerComponent },
+      { path: 'statistics', component: StatisticsViewerComponent },
+      { path: 'transactions', component: TransactionsViewerComponent }
     ]},
     { path: 'supplier', redirectTo: '/supplier/account', pathMatch: 'full' },
     { path: 'supplier', canActivate: [AuthGuardService], component: SupplierContainerComponent, children: [
@@ -32,6 +36,7 @@ const appRoutes: Routes = [
     ]},
     { path: 'requester', redirectTo: '/requester/account', pathMatch: 'full' },
     { path: 'requester', canActivate: [AuthGuardService], component: RequesterContainerComponent, children: [
+      { path: 'resources', component: ResourceManagerComponent},
       { path: 'purchase', component: BuyResourceComponent },
       { path: 'supplier', component: SupplierManagerComponent },
       { path: 'account', component: AccountManagerComponent },

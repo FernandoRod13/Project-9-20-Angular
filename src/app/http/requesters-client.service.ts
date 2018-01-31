@@ -25,4 +25,11 @@ export class RequestersClientService {
     });
   }
 
+  public getRequesterID(accountID: number): Promise<number> {
+    const url = this.baseURL + 'getRequesterId/' + accountID;
+    return this.http.get(url).map( res => {
+      return res['id'];
+    }).toPromise();
+  }
+
 }

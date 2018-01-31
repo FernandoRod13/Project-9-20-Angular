@@ -9,8 +9,20 @@ export class StatisticsClientService {
   private baseURL = 'https://project-9-20-187720.appspot.com/';
   constructor(private http: HttpClient) { }
 
-  public getDailyRequestedStatistic(): Observable<statistic[]> {
+  public getDailyRequestedStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  'statistics/daily/resources/requested';
+    return this.http.get(url).map( res => {
+      return res['Resource_Requested'].map( item => {
+        return new statistic(
+          item.Region,
+          item.Amount
+        );
+      });
+    }).toPromise();
+  }
+
+  public getDailyAvailableStatistic(): Promise<statistic[]> {
+    const url = this.baseURL +  '/statistics/daily/resources/available';
     return this.http.get(url).map( res => {
       return res['Resource_Available'].map( item => {
         return new statistic(
@@ -18,104 +30,92 @@ export class StatisticsClientService {
           item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
-  public getDailyAvailableStatistic(): Observable<statistic[]> {
-    const url = this.baseURL +  '/statistics/daily/resources/available';
-    return this.http.get(url).map( res => {
-      return res['Resource_Available'].map( item => {
-        return new statistic(
-          item.Region,
-          item.Amount          
-        );
-      });
-    });
-  }
-
-  public getDailyCompareStatistic(): Observable<statistic[]> {
+  public getDailyCompareStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  '/statistics/daily/resources/between_requested_available';
     return this.http.get(url).map( res => {
       return res['Resource_Compare'].map( item => {
         return new statistic(
           item.Region,
-          item.Amount          
+          item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
 
-  public getWeekRequestedStatistic(): Observable<statistic[]> {
+  public getWeekRequestedStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  '/statistics/trending/resources/requested';
     return this.http.get(url).map( res => {
       return res['Resource_Requested'].map( item => {
         return new statistic(
           item.Region,
-          item.Amount          
+          item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
-  public getWeekAvailableStatistic(): Observable<statistic[]> {
+  public getWeekAvailableStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  '/statistics/trending/resources/available';
     return this.http.get(url).map( res => {
       return res['Resource_Available'].map( item => {
         return new statistic(
           item.Region,
-          item.Amount          
+          item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
-  public getWeekCompareStatistic(): Observable<statistic[]> {
+  public getWeekCompareStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  '/statistics/trending/resources/between_requested_available';
     return this.http.get(url).map( res => {
       return res['Resource_Compare'].map( item => {
         return new statistic(
           item.Region,
-          item.Amount          
+          item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
-  public getMonthRequestedStatistic(): Observable<statistic[]> {
+  public getMonthRequestedStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  '/statistics/month/resources/requested';
     return this.http.get(url).map( res => {
       return res['Resource_Requested'].map( item => {
         return new statistic(
           item.Region,
-          item.Amount          
+          item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
-  public getMonthAvailableStatistic(): Observable<statistic[]> {
+  public getMonthAvailableStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  '/statistics/month/resources/available';
     return this.http.get(url).map( res => {
       return res['Resource_Available'].map( item => {
         return new statistic(
           item.Region,
-          item.Amount          
+          item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
-  public getMonthCompareStatistic(): Observable<statistic[]> {
+  public getMonthCompareStatistic(): Promise<statistic[]> {
     const url = this.baseURL +  '/statistics/month/resources/between_requested_available';
     return this.http.get(url).map( res => {
       return res['Resource_Compare'].map( item => {
         return new statistic(
           item.Region,
-          item.Amount          
+          item.Amount
         );
       });
-    });
+    }).toPromise();
   }
 
 

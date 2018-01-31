@@ -15,6 +15,7 @@
   <mat-card-content>
     <p>{{resource.description}}</p>
     <p>{{reosurce.price | currency}}</p>
+    <p>Available: {{resource.available | async}}</p>
   </mat-card-content>
   <mat-card-actions>
       <button mat-raised-button (click)="closwReosurce()">Close</button>

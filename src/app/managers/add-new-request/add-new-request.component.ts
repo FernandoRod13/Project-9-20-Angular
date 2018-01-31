@@ -3,6 +3,7 @@ import { ResourcesClientService } from './../../http/resource-client.service';
 import { ResourceType } from './../../models/resources';
 import { RequestersClientService } from './../../http/requesters-client.service';
 import { Requester } from './../../models/requester';
+import { StatusMessageService } from './../../error-handling/status-message.service';
 @Component({
   selector: 'app-add-new-request',
   templateUrl: './add-new-request.component.html',
@@ -21,7 +22,11 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
   public requesters: Requester[];
   public selectedRequester: number;
 
-  constructor( private res: ResourcesClientService, private req: RequestersClientService ) { }
+  constructor(
+    private res: ResourcesClientService,
+    private req: RequestersClientService,
+    private status: StatusMessageService
+  ) { }
 
   ngOnInit() {
     this.requesterObserver = this.req.getAllRequester().subscribe( data => {
@@ -38,19 +43,22 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
   }
 
   public submitNewResourceRequest() {
-    const body = {
-      name: this.name,
-      description: this.description,
-      keywords: this.keywords,
-      qty: this.qty,
-      requester_id: this.selectedRequester,
-      resource_type: this.selectedType
-    };
-    //console.log(body);
-    this.res.addNewResourceRequest(body).then( data => {
-      console.log(data);
+    this.req.getRequesterID(this.selectedRequester).then( id => {
+      const body = {
+        name: this.name,
+        description: this.description,
+        keywords: this.keywords,
+        qty: this.qty,
+        requester_id: id,
+        resource_type: this.selectedType
+      };
+      this.res.addNewResourceRequest(body).then( data => {
+        this.status.success('Added Requester Succesfully!');
+      }).catch( error => {
+        this.status.error(error.message);
+      });
     }).catch( error => {
-      console.log(error);
+      this.status.error('No requester ID found :(');
     });
   }
 

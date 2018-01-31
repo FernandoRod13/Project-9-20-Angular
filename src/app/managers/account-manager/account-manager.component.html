@@ -1,10 +1,19 @@
 <mat-card class="container">
   <mat-card-title>Account Info</mat-card-title>
-  <h2>{{user.first_name}} {{user.last_name}}</h2>
-  <h3>{{user.email}}</h3>
-  <h4>{{user.phone}}</h4>
-  <h5>{{user.city}}</h5>
-  <h6>{{user.type}}</h6>
+  <div class="row">
+    <div class="col-md-6">
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <h3>{{user.email}}</h3>
+        <h4>{{user.phone}}</h4>
+        <h5>{{user.city}}</h5>
+        <h6>{{user.type}}</h6>
+    </div>
+    <div class="col-md-6">
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]=15>
+            <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+          </agm-map>
+    </div>
+  </div>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="signOut()">Sign Out</button>
     <button mat-raised-button (click)="showResetPass()">Reset Password</button>
@@ -14,9 +23,9 @@
 <mat-card class="container" *ngIf=showResetpassword>
   <mat-card-title>Reset Password</mat-card-title>
   <mat-card-content>
-    <form #passwordForm="ngForm" (ngSubmit)="changePassword">
+    <form #passwordForm="ngForm" (ngSubmit)="changePassword()">
       <mat-form-field class="full-width">
-        <input matInput placeholder="New password" type="password" id="password" name="password" [(ngModel)]="confrimPassword"required>
+        <input matInput placeholder="New password" type="password" id="password" name="password" [(ngModel)]="password"required>
       </mat-form-field>
       <mat-form-field class="full-width">
          <input matInput placeholder="Confirm Password" type="password" id="confirmpassword" name="confrimPassword" [(ngModel)]="confirmPassword" required>
@@ -89,39 +98,3 @@
     <button mat-raised-button color="primary" (click)="addNewCard()" [disabled]="!newCardForm.form.valid">Submit</button>
   </mat-card-actions>
 </mat-card>
-
-<mat-card class="container">
-    <mat-card-title>
-      Purchase List
-    </mat-card-title>
-    <mat-card-content>
-        <mat-table #table [dataSource]="purchasesDataSource">
-            <ng-container matColumnDef="id">
-              <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-              <mat-cell *matCellDef="let purchase"> {{purchase.purchase_id}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="resource_name">
-              <mat-header-cell *matHeaderCellDef> Resource Name </mat-header-cell>
-              <mat-cell *matCellDef="let purchase"> {{purchase.resource_name}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="purchasePrice">
-              <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-              <mat-cell *matCellDef="let purchase"> {{purchase.purchase_price | currency}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="qty">
-                <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-                <mat-cell *matCellDef="let purchase"> {{purchase.quantity}} </mat-cell>
-              </ng-container>
-            <ng-container matColumnDef="supplier">
-              <mat-header-cell *matHeaderCellDef> Supplier </mat-header-cell>
-              <mat-cell *matCellDef="let purchase"> {{purchase.supplier_name}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="date">
-              <mat-header-cell *matHeaderCellDef> Purchase Date </mat-header-cell>
-              <mat-cell *matCellDef="let purchase"> {{purchase.date | date}} </mat-cell>
-            </ng-container>
-            <mat-header-row *matHeaderRowDef="purchaseColumns"></mat-header-row>
-            <mat-row *matRowDef="let purchase; columns: purchaseColumns"></mat-row>
-          </mat-table>
-    </mat-card-content>
-  </mat-card>

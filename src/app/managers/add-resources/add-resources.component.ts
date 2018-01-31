@@ -3,6 +3,7 @@ import { Supplier } from '../../models/supplier';
 import { SupplierClientService } from './../../http/supplier-client.service';
 import { ResourcesClientService } from './../../http/resource-client.service';
 import { ResourceType } from './../../models/resources';
+import { StatusMessageService } from './../../error-handling/status-message.service';
 @Component({
   selector: 'app-add-resources',
   templateUrl: './add-resources.component.html',
@@ -24,7 +25,8 @@ export class AddResourcesComponent implements OnInit, OnDestroy {
 
   constructor (
     private sup: SupplierClientService,
-    private res: ResourcesClientService
+    private res: ResourcesClientService,
+    private status: StatusMessageService
      ) { }
 
   ngOnInit() {
@@ -53,11 +55,10 @@ export class AddResourcesComponent implements OnInit, OnDestroy {
       supplier_id: this.selectedSupplier,
       resource_type: this.selectedType
     };
-    console.log(body);
     this.res.addNewResourceAvailable(body).then( data => {
-      console.log(data);
+      this.status.success('Succesfully added new resource!');
     }).catch( error => {
-      console.log(error);
+      this.status.error(error.message);
     });
   }
 

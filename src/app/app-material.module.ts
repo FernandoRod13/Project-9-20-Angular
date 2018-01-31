@@ -12,7 +12,8 @@ import { MatTableModule,
          MatSnackBarModule,
          MatDatepickerModule,
          MatNativeDateModule,
-         MatProgressSpinnerModule } from '@angular/material';
+         MatProgressSpinnerModule,
+         MatTabsModule } from '@angular/material';
 @NgModule ({
     imports: [
         MatTableModule,
@@ -28,7 +29,8 @@ import { MatTableModule,
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatTabsModule
     ],
     exports: [
         MatTableModule,
@@ -44,7 +46,8 @@ import { MatTableModule,
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatTabsModule
     ]
 })
 export class MaterialModule { }

@@ -68,12 +68,31 @@ export class TransactionsClientService {
 
   public purchaseResource (amount: number, resourceID: number, requesterID: number): Promise<Object> {
     const body = {
-      resource_id: resourceID,
-      purchase_qty: amount,
-      requester_id: requesterID
+      resourceid: resourceID,
+      purchaseqty: amount,
+      requesterid: requesterID
     };
     const url = this.baseURL + 'transactions/buyResource';
     return this.http.post(url, body).toPromise();
+  }
+
+  public getAllTransactions(): Observable<Purchase[]> {
+    const url = this.baseURL + 'transactions/getAll';
+    return this.http.get(url).map( res => {
+      return res['Transactions'].map( item => {
+        return new Purchase(
+          item.purchase_id,
+          item.supplier_first_name + ' ' + item.supplier_last_name,
+          item.supplier_id,
+          new Date(item.purchase_date),
+          item.resource_id,
+          item.resource_name,
+          item.resource_description,
+          item.purchase_price,
+          item.quantity
+        );
+      });
+    });
   }
 
 }

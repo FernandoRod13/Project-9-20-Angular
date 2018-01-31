@@ -25,6 +25,7 @@ export class AuthenticationService {
   public login (email: string, password: string): Promise<User> {
     const url = this.baseURL + '/login?email=' + email + '&password=' + password;
     return this.http.get(url).map( data => {
+      console.log(data);
       const admin = data['Administrator'][0];
         this.isLoggedIn = true;
         this.currentUser = new User(
@@ -34,7 +35,9 @@ export class AuthenticationService {
           admin.email,
           admin.phone,
           admin.city,
-          admin.type
+          admin.type,
+          admin.latitude,
+          admin.longitude
         );
         return this.currentUser;
       }).toPromise();
