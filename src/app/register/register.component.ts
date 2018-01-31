@@ -56,7 +56,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
       longitud: 0.0000
     };
     this.auth.register(this.accountType, body).then(() => {
-      this.router.navigate(['/admin/resources']);
+      if (this.accountType === 0) {
+        this.router.navigate(['/admin/account']);
+      }else if (this.accountType === 1) {
+        this.router.navigate(['/supplier/account']);
+      }else {
+        this.router.navigate(['/requester/account']);
+      }
     });
   }
 

@@ -8,6 +8,7 @@ export class Purchase {
         public resource_name: string,
         public resource_description: string,
         public purchase_price: number,
-        public quantity: number
+        public quantity: number,
+        public requester_name: string,
     ) {}
 }

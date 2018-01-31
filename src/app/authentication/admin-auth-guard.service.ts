@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AdminAuthGuardService implements CanActivate {
 
   constructor(
     private auth: AuthenticationService,
@@ -15,7 +15,12 @@ export class AuthGuardService implements CanActivate {
 
   private checkLoggedIn(url: string): boolean {
     if (this.auth.loggedIn()) {
-      return true;
+      if (this.auth.currentUser.type === 'Administrator') {
+        return true;
+      }else {
+        this.router.navigate(['/invalid-permissions']);
+        return false;
+      }
     }
     this.auth.setRedirect(url);
     this.router.navigate(['/login']);

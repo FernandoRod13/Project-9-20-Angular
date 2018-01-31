@@ -7,7 +7,9 @@ import { SupplierManagerComponent } from './managers/supplier-manager/supplier-m
 import { LoginComponent } from './login/login.component';
 import { AdminContainerComponent } from './admin-container/admin-container.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { AuthGuardService } from './authentication/auth-guard.service';
+import { AdminAuthGuardService } from './authentication/admin-auth-guard.service';
+import { RequesterAuthGuardService } from './authentication/requester-auth-guard.service';
+import { SupplierAuthGuardService } from './authentication/supplier-auth-guard.service';
 import { RegisterComponent } from './register/register.component';
 import { RequestersManagerComponent } from './managers/requesters-manager/requesters-manager.component';
 import { SupplierContainerComponent } from './supplier/supplier-container/supplier-container.component';
@@ -15,11 +17,15 @@ import { RequesterContainerComponent} from './requester/requester-container/requ
 import { BuyResourceComponent } from './requester/buy-resource/buy-resource.component';
 import { StatisticsViewerComponent } from './managers/statistics-viewer/statistics-viewer.component';
 import { TransactionsViewerComponent } from './managers/transactions-viewer/transactions-viewer.component';
+import { InventoryManagerComponent } from './supplier/inventory-manager/inventory-manager.component';
+import { InvoiceViewerComponent } from './supplier/invoice-viewer/invoice-viewer.component';
+import { InvalidPermissionsComponent } from './invalid-permissions/invalid-permissions.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent },
+    { path: 'invalid-permissions', component: InvalidPermissionsComponent },
     { path: 'admin', redirectTo: '/admin/account', pathMatch: 'full' },
-    { path: 'admin', canActivate: [AuthGuardService], component: AdminContainerComponent, children: [
+    { path: 'admin', canActivate: [AdminAuthGuardService], component: AdminContainerComponent, children: [
       { path: 'resources', component: ResourceManagerComponent },
       { path: 'suppliers', component: SupplierManagerComponent },
       { path: 'account', component: AccountManagerComponent },
@@ -29,13 +35,15 @@ const appRoutes: Routes = [
       { path: 'transactions', component: TransactionsViewerComponent }
     ]},
     { path: 'supplier', redirectTo: '/supplier/account', pathMatch: 'full' },
-    { path: 'supplier', canActivate: [AuthGuardService], component: SupplierContainerComponent, children: [
-      { path: 'requesters', component: RequestersManagerComponent},
+    { path: 'supplier', canActivate: [SupplierAuthGuardService], component: SupplierContainerComponent, children: [
+      { path: 'inventory', component: InventoryManagerComponent },
+      { path: 'transactions', component: InvoiceViewerComponent },
+      { path: 'requesters', component: RequestersManagerComponent },
       { path: 'account', component: AccountManagerComponent },
       { path: 'notifications', component: NotificationManagerComponent }
     ]},
     { path: 'requester', redirectTo: '/requester/account', pathMatch: 'full' },
-    { path: 'requester', canActivate: [AuthGuardService], component: RequesterContainerComponent, children: [
+    { path: 'requester', canActivate: [RequesterAuthGuardService], component: RequesterContainerComponent, children: [
       { path: 'resources', component: ResourceManagerComponent},
       { path: 'purchase', component: BuyResourceComponent },
       { path: 'supplier', component: SupplierManagerComponent },

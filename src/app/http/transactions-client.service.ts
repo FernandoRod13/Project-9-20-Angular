@@ -38,7 +38,8 @@ export class TransactionsClientService {
           item.resource_name,
           item.resource_description,
           item.purchase_price,
-          item.quantity
+          item.quantity,
+          item.buyer_first_name + ' ' + item.buyer_last_name
         );
       });
     });
@@ -89,7 +90,28 @@ export class TransactionsClientService {
           item.resource_name,
           item.resource_description,
           item.purchase_price,
-          item.quantity
+          item.quantity,
+          item.buyer_first_name + ' ' + item.buyer_last_name
+        );
+      });
+    });
+  }
+
+  public getSupplierTransactions(id: number): Observable<Purchase[]> {
+    const url = this.baseURL + 'transactions/getSupplierTransaction?supplierid=' + id;
+    return this.http.get(url).map( res => {
+      return res['Transactions'].map(item => {
+        return new Purchase(
+          item.purchase_id,
+          item.supplier_first_name + ' ' + item.supplier_last_name,
+          item.supplier_id,
+          new Date(item.purchase_date),
+          item.resource_id,
+          item.resource_name,
+          item.resource_description,
+          item.purchase_price,
+          item.quantity,
+          item.buyer_first_name + ' ' + item.buyer_last_name
         );
       });
     });

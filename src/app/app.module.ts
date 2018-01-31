@@ -14,7 +14,6 @@ import { AccountManagerComponent } from './managers/account-manager/account-mana
 import { NotificationManagerComponent } from './managers/notification-manager/notification-manager.component';
 import { SupplierManagerComponent } from './managers/supplier-manager/supplier-manager.component';
 import { LoginComponent } from './login/login.component';
-import { AuthGuardService } from './authentication/auth-guard.service';
 import { AuthenticationService } from './authentication/authentication.service';
 import { AdminContainerComponent } from './admin-container/admin-container.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -35,6 +34,12 @@ import { StatisticsViewerComponent } from './managers/statistics-viewer/statisti
 import * as Chart from 'chart.js';
 import { AgmCoreModule } from '@agm/core';
 import { TransactionsViewerComponent } from './managers/transactions-viewer/transactions-viewer.component';
+import { InventoryManagerComponent } from './supplier/inventory-manager/inventory-manager.component';
+import { InvoiceViewerComponent } from './supplier/invoice-viewer/invoice-viewer.component';
+import { InvalidPermissionsComponent } from './invalid-permissions/invalid-permissions.component';
+import { SupplierAuthGuardService } from './authentication/supplier-auth-guard.service';
+import { RequesterAuthGuardService } from './authentication/requester-auth-guard.service';
+import { AdminAuthGuardService } from './authentication/admin-auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,10 @@ import { TransactionsViewerComponent } from './managers/transactions-viewer/tran
     BuyResourceComponent,
     SupplierProfileComponent,
     StatisticsViewerComponent,
-    TransactionsViewerComponent
+    TransactionsViewerComponent,
+    InventoryManagerComponent,
+    InvoiceViewerComponent,
+    InvalidPermissionsComponent
   ],
   imports: [
     BrowserModule,
@@ -72,13 +80,15 @@ import { TransactionsViewerComponent } from './managers/transactions-viewer/tran
     ResourcesClientService,
     SupplierClientService,
     RequestersClientService,
-    AuthGuardService,
     AuthenticationService,
     LocationClientService,
     NotificationClientService,
     TransactionsClientService,
     StatisticsClientService,
-    StatusMessageService
+    StatusMessageService,
+    SupplierAuthGuardService,
+    RequesterAuthGuardService,
+    AdminAuthGuardService
   ],
   bootstrap: [AppComponent]
 })
