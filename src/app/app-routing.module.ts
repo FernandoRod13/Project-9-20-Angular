@@ -36,6 +36,7 @@ const appRoutes: Routes = [
     ]},
     { path: 'supplier', redirectTo: '/supplier/account', pathMatch: 'full' },
     { path: 'supplier', canActivate: [SupplierAuthGuardService], component: SupplierContainerComponent, children: [
+      { path: 'resources', component: ResourceManagerComponent },
       { path: 'inventory', component: InventoryManagerComponent },
       { path: 'transactions', component: InvoiceViewerComponent },
       { path: 'requesters', component: RequestersManagerComponent },

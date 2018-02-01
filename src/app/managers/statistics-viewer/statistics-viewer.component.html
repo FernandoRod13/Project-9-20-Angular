@@ -2,7 +2,7 @@
 <mat-card class="container">
     <mat-card-title>Resources Requested Statistics</mat-card-title>
     <mat-card-content>
-        <mat-tab-group>
+        <mat-tab-group (selectedTabChange)="onRequestedStatisticChange($event)">
             <mat-tab label="Today">
                 <canvas id="requested_today" width="700" height="400"></canvas>
             </mat-tab>
@@ -10,7 +10,7 @@
                 <canvas id="requested_weekly" width="700" height="400"></canvas>
             </mat-tab>
             <mat-tab label="Month">
-               <canvas id="myChart" width="700" height="400"></canvas>
+               <canvas id="requested_monthly" width="700" height="400"></canvas>
             </mat-tab>
           </mat-tab-group>
     </mat-card-content>
@@ -19,15 +19,15 @@
 <mat-card class="container">
     <mat-card-title>Resources Available Statistics</mat-card-title>
     <mat-card-content>
-        <mat-tab-group>
+        <mat-tab-group (selectedTabChange)="onAvailableStatisticChange($event)">
             <mat-tab label="Today">
                 <canvas id="available_today" width="700" height="400"></canvas>
             </mat-tab>
             <mat-tab label="Week">
-                <canvas id="myChart" width="700" height="400"></canvas>
+                <canvas id="available_weekly" width="700" height="400"></canvas>
             </mat-tab>
             <mat-tab label="Month">
-                <canvas id="myChart" width="700" height="400"></canvas>
+                <canvas id="available_monthly" width="700" height="400"></canvas>
             </mat-tab>
           </mat-tab-group>
     </mat-card-content>
@@ -36,15 +36,15 @@
 <mat-card class="container">
     <mat-card-title>Resources Available vs Resources Requested</mat-card-title>
     <mat-card-content>
-        <mat-tab-group>
+        <mat-tab-group (selectedTabChange)="onMatchingStatisticChange($event)">
             <mat-tab label="Today">
                 <canvas id="matching_today" width="700" height="400"></canvas>
             </mat-tab>
             <mat-tab label="Week">
-                <canvas id="myChart" width="700" height="400"></canvas>
+                <canvas id="matching_weekly" width="700" height="400"></canvas>
             </mat-tab>
             <mat-tab label="Month">
-                <canvas id="myChart" width="700" height="400"></canvas>
+                <canvas id="matching_monthly" width="700" height="400"></canvas>
             </mat-tab>
           </mat-tab-group>
     </mat-card-content>

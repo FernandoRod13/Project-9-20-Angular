@@ -81,10 +81,10 @@
         <input matInput placeholder="Car Holder" type="text" name="cardHolder" [(ngModel)]="newCard.cardHolder" required>
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Car Number" type="number" name="cardNumber" [(ngModel)]="newCard.cardNumber" required>
+        <input matInput placeholder="Car Number" type="text" name="cardNumber" [(ngModel)]="newCard.cardNumber" required>
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input matInput placeholder="Billing Zip Code" type="number" name="zipCode" [(ngModel)]="newCard.zipCode" required>
+        <input matInput placeholder="Billing Zip Code" type="text" name="zipCode" [(ngModel)]="newCard.zipCode" required>
       </mat-form-field>
       <mat-form-field class="full-width">
         <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Expiration Date" name="expirationDate" [(ngModel)]="newCard.expirationDate" required>

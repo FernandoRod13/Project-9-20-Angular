@@ -40,6 +40,7 @@ import { InvalidPermissionsComponent } from './invalid-permissions/invalid-permi
 import { SupplierAuthGuardService } from './authentication/supplier-auth-guard.service';
 import { RequesterAuthGuardService } from './authentication/requester-auth-guard.service';
 import { AdminAuthGuardService } from './authentication/admin-auth-guard.service';
+import { RequestsViewerComponent } from './requester/requests-viewer/requests-viewer.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AdminAuthGuardService } from './authentication/admin-auth-guard.service
     TransactionsViewerComponent,
     InventoryManagerComponent,
     InvoiceViewerComponent,
-    InvalidPermissionsComponent
+    InvalidPermissionsComponent,
+    RequestsViewerComponent
   ],
   imports: [
     BrowserModule,

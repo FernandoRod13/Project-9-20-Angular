@@ -6,7 +6,7 @@ import { AuthenticationService } from './../../authentication/authentication.ser
   styleUrls: ['./inventory-manager.component.css']
 })
 export class InventoryManagerComponent implements OnInit {
-  private id: number;
+  public id: number;
   constructor (
     private auth: AuthenticationService
   ) { }
