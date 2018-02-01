@@ -43,7 +43,7 @@ export class AuthenticationService {
       }).toPromise();
   }
 
-  public changePassword (email: string, password: string):Promise<Object> {
+  public changePassword (email: string, password: string): Promise<Object> {
     const url = this.baseURL + '/user/changepassword?email=' + email + '&password=' + password;
     return this.http.get(url).toPromise();
   }
@@ -56,7 +56,7 @@ export class AuthenticationService {
     return this.redirectURL;
   }
 
-  public register(type: number, body: any): Promise<Object> {
+  public register(type: number, body: any): Promise<User> {
     let route = '';
     switch (type) {
       case 0:
@@ -72,7 +72,9 @@ export class AuthenticationService {
     const url = this.baseURL + route;
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(url, body, {headers: headers}).toPromise();
+    return this.http.post(url, body, {headers: headers}).toPromise().then( () => {
+      return this.login(body.email, body.password);
+    });
   }
 
   public signOut() {

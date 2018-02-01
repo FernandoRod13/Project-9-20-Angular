@@ -3,7 +3,7 @@ import { Router} from '@angular/router';
 import { LocationClientService } from './../http/location-client.service';
 import { City } from './../models/city';
 import { AuthenticationService } from './../authentication/authentication.service';
-import { RouteConfigLoadStart } from '@angular/router/src/events';
+import { StatusMessageService} from './../error-handling/status-message.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -30,7 +30,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   constructor (
     private location: LocationClientService,
     private auth: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private status: StatusMessageService
   ) { }
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.cityListObserver.unsubcribe();
+    this.cityListObserver.unsubscribe();
   }
 
   public register() {
@@ -56,14 +57,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
       longitud: 0.0000
     };
     this.auth.register(this.accountType, body).then(() => {
+      this.status.success('Succesfuly Register a new user');
       if (this.accountType === 0) {
         this.router.navigate(['/admin/account']);
       }else if (this.accountType === 1) {
         this.router.navigate(['/supplier/account']);
-      }else {
+      }else if (this.accountType === 2) {
         this.router.navigate(['/requester/account']);
       }
+    }).catch(error => {
+      this.status.error(error.message);
     });
+  }
+
+  public toLogin() {
+    this.router.navigate(['/login']);
   }
 
 }

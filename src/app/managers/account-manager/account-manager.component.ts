@@ -54,8 +54,13 @@ export class AccountManagerComponent implements OnInit, OnDestroy {
   public changePassword() {
     if ( this.password.length > 4 && this.password === this.confirmPassword) {
       this.auth.changePassword(this.user.email, this.password).then(() => {
-        this.showResetpassword = false;
+        this.hideResetPass();
+        this.status.success('Successfuly changed password!');
+      }).catch(error => {
+        this.status.error(error.message);
       });
+    } else {
+      this.status.error('Error: assowrds dont match or password length less than 4.');
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ResourcesClientService } from './../../http/resource-client.service';
 import { ResourceType } from './../../models/resources';
 import { RequestersClientService } from './../../http/requesters-client.service';
@@ -10,7 +10,7 @@ import { StatusMessageService } from './../../error-handling/status-message.serv
   styleUrls: ['./add-new-request.component.css']
 })
 export class AddNewRequestComponent implements OnInit, OnDestroy {
-
+  @Input() requesterID: number;
   public name: string;
   public description: string;
   public qty: number;
@@ -21,6 +21,7 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
   public selectedType: number;
   public requesters: Requester[];
   public selectedRequester: number;
+  @Output() finished = new EventEmitter<boolean>();
 
   constructor(
     private res: ResourcesClientService,
@@ -43,23 +44,39 @@ export class AddNewRequestComponent implements OnInit, OnDestroy {
   }
 
   public submitNewResourceRequest() {
-    this.req.getRequesterID(this.selectedRequester).then( id => {
+    if (this.requesterID) {
       const body = {
         name: this.name,
         description: this.description,
         keywords: this.keywords,
         qty: this.qty,
-        requester_id: id,
+        requester_id: this.requesterID,
         resource_type: this.selectedType
       };
       this.res.addNewResourceRequest(body).then( data => {
         this.status.success('Added Requester Succesfully!');
+        this.finished.emit(true);
       }).catch( error => {
         this.status.error(error.message);
+        this.finished.emit(false);
       });
-    }).catch( error => {
-      this.status.error('No requester ID found :(');
-    });
+    } else {
+      const body = {
+        name: this.name,
+        description: this.description,
+        keywords: this.keywords,
+        qty: this.qty,
+        requester_id: this.selectedRequester,
+        resource_type: this.selectedType
+      };
+      this.res.addNewResourceRequest(body).then( data => {
+        this.status.success('Added Requester Succesfully!');
+        this.finished.emit(true);
+      }).catch( error => {
+        this.status.error(error.message);
+        this.finished.emit(false);
+      });
+    }
   }
 
 }

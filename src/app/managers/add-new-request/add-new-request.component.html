@@ -14,8 +14,8 @@
           <input matInput placeholder="Keywords" type="text" name="keywords" [(ngModel)]="keywords" required>
         </mat-form-field>
       <div class="row">
-          <mat-form-field class="col-6">
-            <mat-select placeholder="Choose Requester" [(ngModel)]="selectedRequester" name="id" required>
+          <mat-form-field class="col-6" *ngIf="requesterID == null">
+            <mat-select placeholder="Choose Requester" [(ngModel)]="selectedRequester" name="id">
               <mat-option>--</mat-option>
               <mat-option *ngFor="let req of requesters" [value]="req.requester_id">
                 {{req.first_name}} {{req.last_name}}

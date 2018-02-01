@@ -77,6 +77,17 @@ export class TransactionsClientService {
     return this.http.post(url, body).toPromise();
   }
 
+  public purchaseResourceWithPaymentMethod (amount: number, resourceID: number, requesterID: number, payMethod: number): Promise<Object> {
+    const body = {
+      resourceid: resourceID,
+      purchaseqty: amount,
+      requesterid: requesterID,
+      payment_method_id: payMethod
+    };
+    const url = this.baseURL + 'transactions/buyResource';
+    return this.http.post(url, body).toPromise();
+  }
+
   public getAllTransactions(): Observable<Purchase[]> {
     const url = this.baseURL + 'transactions/getAll';
     return this.http.get(url).map( res => {

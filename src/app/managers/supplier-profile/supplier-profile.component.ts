@@ -13,6 +13,7 @@ import { ResourceAvaliable } from './../../models/resources';
 export class SupplierProfileComponent implements OnInit {
   public supplier: Supplier;
   @Input() accountID: number;
+  @Input() supID: number;
   private supplierID; number;
   public avaliableDisplayedRows = ['id', 'name', 'category', 'city', 'avaliable', 'price'];
   public availableDataSource = new MatTableDataSource<ResourceAvaliable>();
@@ -25,23 +26,37 @@ export class SupplierProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.suppliers.getSupplierID(this.accountID).then( id => {
-      this.supplierID = id;
-      this.suppliers.getSupplierInfo(this.supplierID).then( sup => {
-        console.log(sup);
-        this.supplier = sup;
+    if (this.supID) {
+      this.supplierID = this.supID;
+        this.suppliers.getSupplierInfo(this.supplierID).then( sup => {
+          this.supplier = sup;
+        }).catch( error => {
+          this.status.error(error.message);
+        });
+        this.resources.getResourcesBySupplier(this.supplierID).then( resourceList => {
+          this.resourcesAvaliable = resourceList;
+          this.availableDataSource.data = this.resourcesAvaliable;
+        }).catch( error => {
+          this.status.error(error.message);
+        });
+    }else {
+      this.suppliers.getSupplierID(this.accountID).then( id => {
+        this.supplierID = id;
+        this.suppliers.getSupplierInfo(this.supplierID).then( sup => {
+          this.supplier = sup;
+        }).catch( error => {
+          this.status.error(error.message);
+        });
+        this.resources.getResourcesBySupplier(this.supplierID).then( resourceList => {
+          this.resourcesAvaliable = resourceList;
+          this.availableDataSource.data = this.resourcesAvaliable;
+        }).catch( error => {
+          this.status.error(error.message);
+        });
       }).catch( error => {
         this.status.error(error.message);
       });
-      this.resources.getResourcesBySupplier(this.supplierID).then( resourceList => {
-        this.resourcesAvaliable = resourceList;
-        this.availableDataSource.data = this.resourcesAvaliable;
-      }).catch( error => {
-        this.status.error(error.message);
-      });
-    }).catch( error => {
-      this.status.error(error.message);
-    });
+    }
   }
 
 }

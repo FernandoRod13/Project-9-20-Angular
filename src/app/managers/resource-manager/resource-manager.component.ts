@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { ResourcesClientService} from './../../http/resource-client.service';
 import { ResourceAvaliable, ResourceRequested } from './../../models/resources';
+import { AuthenticationService } from './../../authentication/authentication.service';
 @Component({
   selector: 'app-resource-manager',
   templateUrl: './resource-manager.component.html',
@@ -19,9 +20,14 @@ export class ResourceManagerComponent implements OnInit, OnDestroy {
   public addingResource: boolean;
   public addingRequest: boolean;
   public buttonLabel: string;
-  constructor (private client: ResourcesClientService) { }
+  public isAdmin: boolean;
+  constructor (
+    private client: ResourcesClientService,
+    private auth: AuthenticationService
+  ) { }
 
   ngOnInit() {
+    this.isAdmin = this.auth.currentUser.type === 'Administrator';
     this.addingResource = false;
     this.addingRequest = false;
     this.buttonLabel = 'Add';

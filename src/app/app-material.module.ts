@@ -13,7 +13,8 @@ import { MatTableModule,
          MatDatepickerModule,
          MatNativeDateModule,
          MatProgressSpinnerModule,
-         MatTabsModule } from '@angular/material';
+         MatTabsModule,
+         MatRadioModule } from '@angular/material';
 @NgModule ({
     imports: [
         MatTableModule,
@@ -30,7 +31,8 @@ import { MatTableModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatProgressSpinnerModule,
-        MatTabsModule
+        MatTabsModule,
+        MatRadioModule
     ],
     exports: [
         MatTableModule,
@@ -47,7 +49,8 @@ import { MatTableModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatProgressSpinnerModule,
-        MatTabsModule
+        MatTabsModule,
+        MatRadioModule
     ]
 })
 export class MaterialModule { }

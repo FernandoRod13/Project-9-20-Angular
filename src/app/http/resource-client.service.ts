@@ -120,4 +120,23 @@ export class ResourcesClientService {
     }).toPromise();
   }
 
+
+  public getResourcesByRequester(requester_id: number): Promise<ResourceRequested[]> {
+    const url = this.baseURL + 'resources/requester/' + requester_id + '/resources';
+    return this.http.get(url).map(res => {
+      return res['Resources'].map(item => {
+        return new ResourceRequested(
+          item.resource_id,
+          item.account_id,
+          item.category,
+          item.city,
+          item.description,
+          new Date(item.requested_date),
+          item.name,
+          item.qty
+        );
+      });
+    }).toPromise();
+  }
+
 }

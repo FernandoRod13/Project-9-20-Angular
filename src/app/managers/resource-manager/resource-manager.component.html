@@ -1,13 +1,10 @@
-<div class="addingButton">
+<div class="addingButton" *ngIf="isAdmin">
     <mat-menu #appMenu="matMenu">
         <button mat-menu-item (click)="addingResourceStateChange()"> Resource Available </button>
         <button mat-menu-item (click)="addingRequestStateChange()">Resource Requested </button>
       </mat-menu>
     <button mat-raised-button color="primary" [matMenuTriggerFor]="appMenu" *ngIf="!addingResource && !addingRequest">Add</button>
     <button mat-raised-button color="primary" (click)="closeAddingWindows()" *ngIf="addingResource || addingRequest">Cancel</button>
-</div>
-<div class="addingButton">
-
 </div>
 <div *ngIf="!addingResource && !addingRequest">
   <mat-card class="table-container mat-elevation-z8">

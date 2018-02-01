@@ -20,6 +20,7 @@ import { TransactionsViewerComponent } from './managers/transactions-viewer/tran
 import { InventoryManagerComponent } from './supplier/inventory-manager/inventory-manager.component';
 import { InvoiceViewerComponent } from './supplier/invoice-viewer/invoice-viewer.component';
 import { InvalidPermissionsComponent } from './invalid-permissions/invalid-permissions.component';
+import { RequestsViewerComponent } from './requester/requests-viewer/requests-viewer.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent },
@@ -45,13 +46,14 @@ const appRoutes: Routes = [
     ]},
     { path: 'requester', redirectTo: '/requester/account', pathMatch: 'full' },
     { path: 'requester', canActivate: [RequesterAuthGuardService], component: RequesterContainerComponent, children: [
+      { path: 'requests', component: RequestsViewerComponent },
       { path: 'resources', component: ResourceManagerComponent},
       { path: 'purchase', component: BuyResourceComponent },
       { path: 'supplier', component: SupplierManagerComponent },
       { path: 'account', component: AccountManagerComponent },
       { path: 'notifications', component: NotificationManagerComponent }
     ]},
-    { path: '',   redirectTo: '/admin/resources', pathMatch: 'full' },
+    { path: '',   redirectTo: '/login', pathMatch: 'full' },
     { path: '**', component: NotFoundComponent }
   ];
 
